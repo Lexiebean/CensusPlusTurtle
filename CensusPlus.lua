@@ -47,7 +47,7 @@ local g_TZWarningSent = false;
 -- Constants
 --
 ---------------------------------------------------------------------------------
-local CensusPlus_VERSION = "1.0.0"; 				-- version
+local CensusPlus_VERSION = "1.0.1"; 				-- version
 local CensusPlus_MAXBARHEIGHT = 128;			-- Length of blue bars
 local CensusPlus_NUMGUILDBUTTONS = 19;			-- How many guild buttons are on the UI?
 local MAX_CHARACTER_LEVEL = 60;					-- Maximum level a PC can attain
@@ -194,22 +194,21 @@ g_TimeDatabase[CENSUSPlus_AlteracValley]		= 0;
 g_TimeDatabase[CENSUSPlus_ArathiBasin]			= 0;
 
 --  These two DO NOT need to be localized
-local CENSUSPlus_HORDE            = "Horde";
-local CENSUSPlus_ALLIANCE         = "Alliance";
+local CENSUSPlus_TURTLE         = "TURTLE";
 
 
 local g_FactionCheck = {};
-g_FactionCheck[CENSUSPlus_ORC]		= CENSUSPlus_HORDE;
-g_FactionCheck[CENSUSPlus_TAUREN]	= CENSUSPlus_HORDE;
-g_FactionCheck[CENSUSPlus_TROLL]	= CENSUSPlus_HORDE;
-g_FactionCheck[CENSUSPlus_UNDEAD]	= CENSUSPlus_HORDE;
-g_FactionCheck[CENSUSPlus_GOBLIN]	= CENSUSPlus_HORDE;
+g_FactionCheck[CENSUSPlus_ORC]		= CENSUSPlus_TURTLE;
+g_FactionCheck[CENSUSPlus_TAUREN]	= CENSUSPlus_TURTLE;
+g_FactionCheck[CENSUSPlus_TROLL]	= CENSUSPlus_TURTLE;
+g_FactionCheck[CENSUSPlus_UNDEAD]	= CENSUSPlus_TURTLE;
+g_FactionCheck[CENSUSPlus_GOBLIN]	= CENSUSPlus_TURTLE;
 
-g_FactionCheck[CENSUSPlus_DWARF]	= CENSUSPlus_ALLIANCE;
-g_FactionCheck[CENSUSPlus_GNOME]	= CENSUSPlus_ALLIANCE;
-g_FactionCheck[CENSUSPlus_HUMAN]	= CENSUSPlus_ALLIANCE;
-g_FactionCheck[CENSUSPlus_NIGHTELF]	= CENSUSPlus_ALLIANCE;
-g_FactionCheck[CENSUSPlus_HIGHELF]	= CENSUSPlus_ALLIANCE;
+g_FactionCheck[CENSUSPlus_DWARF]	= CENSUSPlus_TURTLE;
+g_FactionCheck[CENSUSPlus_GNOME]	= CENSUSPlus_TURTLE;
+g_FactionCheck[CENSUSPlus_HUMAN]	= CENSUSPlus_TURTLE;
+g_FactionCheck[CENSUSPlus_NIGHTELF]	= CENSUSPlus_TURTLE;
+g_FactionCheck[CENSUSPlus_HIGHELF]	= CENSUSPlus_TURTLE;
 
 ----------------------------------------------------------------------------------
 --
@@ -361,11 +360,7 @@ end
 -----------------------------------------------------------------------------------
 function CensusPlus_GetFactionRaces(faction)
 	local ret = {};
-	if (faction == CENSUSPlus_HORDE) then
-		ret = {CENSUSPlus_ORC, CENSUSPlus_TAUREN, CENSUSPlus_TROLL, CENSUSPlus_UNDEAD, CENSUSPlus_GOBLIN, CENSUSPlus_DWARF, CENSUSPlus_GNOME, CENSUSPlus_HUMAN, CENSUSPlus_NIGHTELF, CENSUSPlus_HIGHELF};
-	elseif (faction == CENSUSPlus_ALLIANCE) then
-		ret = {CENSUSPlus_ORC, CENSUSPlus_TAUREN, CENSUSPlus_TROLL, CENSUSPlus_UNDEAD, CENSUSPlus_GOBLIN, CENSUSPlus_DWARF, CENSUSPlus_GNOME, CENSUSPlus_HUMAN, CENSUSPlus_NIGHTELF, CENSUSPlus_HIGHELF};
-	end
+	ret = {CENSUSPlus_ORC, CENSUSPlus_TAUREN, CENSUSPlus_TROLL, CENSUSPlus_UNDEAD, CENSUSPlus_GOBLIN, CENSUSPlus_DWARF, CENSUSPlus_GNOME, CENSUSPlus_HUMAN, CENSUSPlus_NIGHTELF, CENSUSPlus_HIGHELF};
 	return ret;
 end
 
@@ -376,11 +371,7 @@ end
 -----------------------------------------------------------------------------------
 function CensusPlus_GetFactionClasses(faction)
 	local ret = {};
-	if (faction == CENSUSPlus_HORDE) then
-		ret = {CENSUSPlus_DRUID, CENSUSPlus_HUNTER, CENSUSPlus_MAGE, CENSUSPlus_PRIEST, CENSUSPlus_ROGUE, CENSUSPlus_WARLOCK, CENSUSPlus_WARRIOR, CENSUSPlus_SHAMAN, CENSUSPlus_PALADIN};
-	elseif (faction == CENSUSPlus_ALLIANCE) then
-		ret = {CENSUSPlus_DRUID, CENSUSPlus_HUNTER, CENSUSPlus_MAGE, CENSUSPlus_PRIEST, CENSUSPlus_ROGUE, CENSUSPlus_WARLOCK, CENSUSPlus_WARRIOR, CENSUSPlus_SHAMAN, CENSUSPlus_PALADIN};
-	end
+	ret = {CENSUSPlus_DRUID, CENSUSPlus_HUNTER, CENSUSPlus_MAGE, CENSUSPlus_PRIEST, CENSUSPlus_ROGUE, CENSUSPlus_WARLOCK, CENSUSPlus_WARRIOR, CENSUSPlus_SHAMAN, CENSUSPlus_PALADIN};
 	return ret;
 end
 
@@ -856,7 +847,8 @@ function CensusPlus_InternalWho( search, level )
 	g_InternalSearchLevel = level;
 	g_InternalSearchCount = 0;
 	local realmName = g_CensusPlusLocale .. GetCVar("realmName");
-	CensusPlus_ForAllCharacters( realmName, UnitFactionGroup("player"), nil, nil, nil, nil, CensusPlus_InternalWhoResult)
+	local factionName = "TURTLE";
+	CensusPlus_ForAllCharacters( realmName, factionName, nil, nil, nil, nil, CensusPlus_InternalWhoResult)
 
 	CensusPlus_WhoMsg( "Found " .. g_InternalSearchCount .. " players." );
 end
@@ -1303,7 +1295,7 @@ function CensusPlus_OnEvent(event,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9)
 					--
 					-- We cannot split the level range any more
 					--
-					local factionGroup = UnitFactionGroup("player");
+					local factionGroup = "TURTLE";
 					local level = minLevel;
 					if (race == nil) then
 						--
@@ -1448,7 +1440,7 @@ function CensusPlus_ProcessTarget( unit )
 		return
 	end
 
-	if (sightingData ~= nil and (sightingData.faction == "Alliance" or sightingData.faction == "Horde")) then
+	if (sightingData ~= nil and (sightingData.faction == "TURTLE" or sightingData.faction == "TURTLE")) then
 
 		--
 		--  Do a quick check to see if this is an MC'd person
@@ -1564,7 +1556,7 @@ function CensusPlus_CollectSightingData(unit)
 			race=UnitRace(unit),
 			class=UnitClass(unit),
 			guild=GetGuildInfo(unit),
-			faction=UnitFactionGroup(unit)
+			faction="TURTLE"
 		};
 	else
 		return nil;
@@ -1852,21 +1844,22 @@ function CensusPlus_DoTimeCounts()
 		CensusPlus_Database["TimesPlus"][realmName]= {};
 	end
 
-	if( CensusPlus_Database["TimesPlus"][realmName][UnitFactionGroup("player")] == nil ) then
-        CensusPlus_Database["TimesPlus"][realmName][UnitFactionGroup("player")] = {};
+	local factionName = "TURTLE";
+	if( CensusPlus_Database["TimesPlus"][realmName][factionName] == nil ) then
+        CensusPlus_Database["TimesPlus"][realmName][factionName] = {};
 	end
 
-	local numTimes = table.getn( CensusPlus_Database["TimesPlus"][realmName][UnitFactionGroup("player")] );
+	local numTimes = table.getn( CensusPlus_Database["TimesPlus"][realmName][factionName] );
 	if (numTimes > CP_MAX_TIMES-1 ) then
 		--
 		-- Remove the top time from the queue
 		--
-		table.remove( CensusPlus_Database["TimesPlus"][realmName][UnitFactionGroup("player")] );
+		table.remove( CensusPlus_Database["TimesPlus"][realmName][factionName] );
 	end
 
 	local hour, minute = GetGameTime();
 --					CensusPlus_Database["TimesPlus"][realmName][UnitFactionGroup("player")]["" .. hour .. ""] = g_TimeDatabase;
-	CensusPlus_Database["TimesPlus"][realmName][UnitFactionGroup("player")][CensusPlus_DetermineServerDate() .. "&" .. hour .. ":" .. minute .. ":00"] =
+	CensusPlus_Database["TimesPlus"][realmName][factionName][CensusPlus_DetermineServerDate() .. "&" .. hour .. ":" .. minute .. ":00"] =
 		g_TimeDatabase[CENSUSPlus_DRUID] .. "&" ..
 		g_TimeDatabase[CENSUSPlus_HUNTER] .. "&" ..
 		g_TimeDatabase[CENSUSPlus_MAGE] .. "&" ..
@@ -1930,7 +1923,7 @@ function CensusPlus_ProcessGuildResults()
 		guildRealmDatabase = CensusPlus_Database["Guilds"][realmName];
 	end
 
-	local factionGroup = UnitFactionGroup("player");
+	local factionGroup = "TURTLE";
 	if( factionGroup == nil ) then
 	    CensusPlus_Database["Guilds"] = nil;
 		SetGuildRosterShowOffline(showOfflineTemp);
@@ -2041,7 +2034,7 @@ function CensusPlus_ProcessWhoResults()
 	--
 	-- Get the portion of the database for this faction
 	--
-	local factionGroup = UnitFactionGroup("player");
+	local factionGroup = "TURTLE";
 	local factionDatabase = realmDatabase[factionGroup];
 	if (factionDatabase == nil) then
 		realmDatabase[factionGroup] = {};
@@ -2267,7 +2260,7 @@ function CensusPlus_UpdateView()
 	end
 	CensusPlusRealmName:SetText(format(CENSUSPlus_REALMNAME, realmName));
 
-	local factionGroup = UnitFactionGroup("player");
+	local factionGroup = "TURTLE";
 	if( factionGroup == nil ) then
 		return;
 	end
@@ -2628,7 +2621,7 @@ end
 --
 ---------------------------------------------------------------------------------
 function CensusPlus_OnEnterRace()
-	local factionGroup = UnitFactionGroup("player");
+	local factionGroup = "TURTLE";
 	local thisFactionRaces = CensusPlus_GetFactionRaces(factionGroup);
 	local id = this:GetID();
 	local raceName = thisFactionRaces[id];
@@ -2647,7 +2640,7 @@ end
 --
 ---------------------------------------------------------------------------------
 function CensusPlus_OnEnterClass()
-	local factionGroup = UnitFactionGroup("player");
+	local factionGroup = "TURTLE";
 	local thisFactionClasses = CensusPlus_GetFactionClasses(factionGroup);
 	local id = this:GetID();
 	local className = thisFactionClasses[id];
@@ -2834,12 +2827,6 @@ function CensusPlus_SelectLocale( locale, auto )
 
 	textLine = getglobal("CensusPlusText");
 	textLine:SetText("Census+ Turtle v"..CensusPlus_VERSION .. " " .. g_CensusPlusLocale );
-
-    if(( CENSUSPlus_DWARF == "Nain" or CENSUSPlus_DWARF == "Zwerg" ) and GetLocale() == "usEN") then
-		CensusPlus_Msg( "You appear to have a US Census version, yet your localization is set to French or German." );
-		CensusPlus_Msg( "Please do not upload stats to WarcraftRealms until this has been resolved." );
-		CensusPlus_Msg( "If this is incorrect, please let Rollie know at www.WarcraftRealms.com about your situation so he can make corrections." );
-    end
 
 	CP_EU_US_Version:Hide();
 
@@ -3202,7 +3189,7 @@ function CensusPlus_UpdateBattleGroundInfo()
 										--
 					-- Get the portion of the database for this faction
 					--
-					local factionGroup = UnitFactionGroup("player");
+					local factionGroup = "TURTLE";
 					if( factionGroup ~= nil ) then
 						if (CensusPlus_BGInfo[realmName][factionGroup] == nil) then
 							CensusPlus_BGInfo[realmName][factionGroup] = {};

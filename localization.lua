@@ -28,7 +28,7 @@ CENSUSPlus_HELP             = " Use /censusplus to open and close the Census+ Tu
 CENSUSPlus_MSG1             = " Loaded - type /censusplus or /census+ to open main window";
 CENSUSPlus_MSG2             = "Use /censusdate to set today's date in the format of MM-DD-YYYY, ie. 12-25-2004";
 
-CENSUSPlus_UPLOAD           = "There is currently no website for CensusPlus Turtle data.";
+CENSUSPlus_UPLOAD           = "You can view some CensusPlus Turtle data here: https://turtle-census.org/";
 CENSUSPlus_SETTINGDATE      = "Setting date to => ";
 CENSUSPlus_PAUSE            = "Pause";
 CENSUSPlus_UNPAUSE          = "Un-Pause";

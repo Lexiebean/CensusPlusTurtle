@@ -78,8 +78,7 @@ if ( GetLocale() == "frFR" ) then
     CENSUSPlus_MINIMIZE         = "Réduire la fenêtre CensusPlus";
     CENSUSPlus_BUTTON_MINIMIZE  = "Réduire";
         
-    CENSUSPlus_HORDE            = "Horde";
-    CENSUSPlus_ALLIANCE         = "Alliance";
+    CENSUSPlus_TURTLE           = "TURTLE";
 
     CENSUSPlus_DRUID            = "Druide";
     CENSUSPlus_HUNTER           = "Chasseur";
