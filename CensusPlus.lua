@@ -47,7 +47,7 @@ local g_TZWarningSent = false;
 -- Constants
 --
 ---------------------------------------------------------------------------------
-local CensusPlus_VERSION = "1.0.1"; 				-- version
+local CensusPlus_VERSION = "1.0.2"; 				-- version
 local CensusPlus_MAXBARHEIGHT = 128;			-- Length of blue bars
 local CensusPlus_NUMGUILDBUTTONS = 19;			-- How many guild buttons are on the UI?
 local MAX_CHARACTER_LEVEL = 60;					-- Maximum level a PC can attain
@@ -383,17 +383,17 @@ end
 local function GetRaceClasses(race)
 	local ret = {};
 	if (race == CENSUSPlus_ORC) then
-		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_HUNTER, CENSUSPlus_ROGUE, CENSUSPlus_SHAMAN, CENSUSPlus_WARLOCK};
+		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_HUNTER, CENSUSPlus_ROGUE, CENSUSPlus_SHAMAN, CENSUSPlus_WARLOCK, CENSUSPlus_MAGE};
 	elseif (race == CENSUSPlus_TAUREN) then
 		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_HUNTER, CENSUSPlus_SHAMAN, CENSUSPlus_DRUID};
 	elseif (race == CENSUSPlus_TROLL) then
 		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_HUNTER, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_SHAMAN, CENSUSPlus_MAGE};
 	elseif (race == CENSUSPlus_UNDEAD) then
-		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_MAGE, CENSUSPlus_WARLOCK};
+		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_MAGE, CENSUSPlus_WARLOCK, CENSUSPlus_HUNTER};
 	elseif (race == CENSUSPlus_DWARF) then
-		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_PALADIN, CENSUSPlus_HUNTER, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST};
+		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_PALADIN, CENSUSPlus_HUNTER, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_MAGE};
 	elseif (race == CENSUSPlus_GNOME) then
-		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_ROGUE, CENSUSPlus_MAGE, CENSUSPlus_WARLOCK};
+		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_ROGUE, CENSUSPlus_MAGE, CENSUSPlus_WARLOCK, CENSUSPlus_HUNTER};
 	elseif (race == CENSUSPlus_HUMAN) then
 		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_PALADIN, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_MAGE, CENSUSPlus_WARLOCK};
 	elseif (race == CENSUSPlus_NIGHTELF) then
