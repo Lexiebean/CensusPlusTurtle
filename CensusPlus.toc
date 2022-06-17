@@ -1,5 +1,5 @@
 ## Interface: 11200
-## Title: CensusPlus
+## Title: CensusPlusTurtle
 ## Notes: Collects and displays census information. This AddOn is licenced under the GNU GPL, see GPL.txt for details.
 ## Original Author: Ian Pieragostini
 ## Modified By: Cooper Sellers - www.warcraftrealms.com 

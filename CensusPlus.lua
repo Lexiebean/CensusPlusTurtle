@@ -518,7 +518,7 @@ function CensusPlus_OnLoad()
 	this:RegisterEvent("VARIABLES_LOADED");
 	this:RegisterEvent("WHO_LIST_UPDATE");
 --	this:RegisterEvent("GUILD_ROSTER_SHOW");
-	this:RegisterEvent("GUILD_ROSTER_UPDATE");
+--	this:RegisterEvent("GUILD_ROSTER_UPDATE");
 --	this:RegisterEvent("TRAINER_SHOW");
 --	this:RegisterEvent("TRAINER_CLOSED");
 --	this:RegisterEvent("MERCHANT_SHOW");

@@ -103,7 +103,7 @@ function CensusPlus_ProcessMyHonor()
 	--
 	-- Get the portion of the database for this faction
 	--
-	local factionGroup = UnitFactionGroup("player");
+	local factionGroup = "TURTLE";
 	local factionDatabase = realmDatabase[factionGroup];
 	if (factionDatabase == nil) then
 		realmDatabase[factionGroup] = {};
