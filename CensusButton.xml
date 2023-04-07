@@ -39,8 +39,8 @@
 						</Scripts>
 					</Frame>
 				</Frames>
-				<NormalTexture file="Interface\AddOns\CensusPlus\Skin\CensusButton-Up"/>
-				<PushedTexture file="Interface\AddOns\CensusPlus\Skin\CensusButton-Down"/>
+				<NormalTexture file="Interface\AddOns\CensusPlusTurtle\Skin\CensusButton-Up"/>
+				<PushedTexture file="Interface\AddOns\CensusPlusTurtle\Skin\CensusButton-Down"/>
 				<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
 				<Scripts>
 				    <OnLoad>

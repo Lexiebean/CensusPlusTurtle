@@ -9,7 +9,7 @@
         <Size>
             <AbsDimension x="32" y="32" />
         </Size>
-        <NormalTexture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Unknown" />
+        <NormalTexture file="Interface\AddOns\CensusPlusTurtle\Skin\CensusPlus_Unknown" />
         <HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD">
             <Size>
                 <AbsDimension x="32" y="32" />
@@ -52,7 +52,7 @@
         <Size>
             <AbsDimension x="32" y="128" />
         </Size>
-        <NormalTexture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Bar" />
+        <NormalTexture file="Interface\AddOns\CensusPlusTurtle\Skin\CensusPlus_Bar" />
         <Scripts>
             <OnLeave>
 				 GameTooltip:Hide();
@@ -77,7 +77,7 @@
         <Size>
             <AbsDimension x="8" y="128" />
         </Size>
-        <NormalTexture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_LevelBar" />
+        <NormalTexture file="Interface\AddOns\CensusPlusTurtle\Skin\CensusPlus_LevelBar" />
         <Scripts>
     		<OnClick>
     			CensusPlus_OnClickLevel(arg1);
@@ -241,7 +241,7 @@
         </Anchors>
         <Layers>
             <Layer level="BACKGROUND">
-                <Texture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Window_Left">
+                <Texture file="Interface\AddOns\CensusPlusTurtle\Skin\CensusPlus_Window_Left">
                     <Size>
                         <AbsDimension x="512" y="512" />
                     </Size>
@@ -253,7 +253,7 @@
                         </Anchor>
                     </Anchors>
                 </Texture>
-                <Texture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Window_TopRight">
+                <Texture file="Interface\AddOns\CensusPlusTurtle\Skin\CensusPlus_Window_TopRight">
                     <Size>
                         <AbsDimension x="256" y="256" />
                     </Size>
@@ -265,7 +265,7 @@
                         </Anchor>
                     </Anchors>
                 </Texture>
-                <Texture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Window_BottomRight">
+                <Texture file="Interface\AddOns\CensusPlusTurtle\Skin\CensusPlus_Window_BottomRight">
                     <Size>
                         <AbsDimension x="256" y="256" />
                     </Size>
@@ -277,7 +277,7 @@
                         </Anchor>
                     </Anchors>
                 </Texture>
-				<Texture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Window_Mid">
+				<Texture file="Interface\AddOns\CensusPlusTurtle\Skin\CensusPlus_Window_Mid">
                     <Size>
                         <AbsDimension x="512" y="512" />
                     </Size>
