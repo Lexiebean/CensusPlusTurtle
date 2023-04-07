@@ -56,10 +56,14 @@ function CensusButton_UpdatePosition()
 	);
 end
 
-function CensusButton_OnUpdate()
+local CensusUpdateFrame = CreateFrame("FRAME", "CensusUpdateFrame");
+CensusUpdateFrame:SetScript('OnUpdate', function()
 	if( init ) then
 		CensusPlus_OnUpdate();
 	end
+end)
+
+function CensusButton_OnUpdate()
 end
 
 function CensusPlusButton_OnClick( arg1 )

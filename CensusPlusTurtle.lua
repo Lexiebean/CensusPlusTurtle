@@ -47,7 +47,7 @@ local g_TZWarningSent = false;
 -- Constants
 --
 ---------------------------------------------------------------------------------
-local CensusPlus_VERSION = "1.0.4"; 				-- version
+local CensusPlus_VERSION = "1.0.3"; 				-- version
 local CensusPlus_MAXBARHEIGHT = 128;			-- Length of blue bars
 local CensusPlus_NUMGUILDBUTTONS = 19;			-- How many guild buttons are on the UI?
 local MAX_CHARACTER_LEVEL = 60;					-- Maximum level a PC can attain
@@ -239,6 +239,7 @@ StaticPopupDialogs["CP_CONTINUE_CENSUS"] = {
   button1 = CENSUSPlus_CONTINUE,
   OnAccept = function()
 				g_CensusPlusManuallyPaused = false;
+				CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Running")
 				CensusPlusTakeButton:SetText( CENSUSPlus_PAUSE );			
 			end,
   sound = "levelup2",
@@ -296,6 +297,7 @@ local function CP_HookAddMessage(frame)
 					g_CensusWhoOverrideMsg = nil;
 					g_WaitingForOverrideUpdate = false;
 					CensusPlus_Msg( CENSUSPlus_OVERRIDE_COMPLETE );
+					CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Running")
 					return AddMessage(this, msg, r, g, b, id)						
 				elseif( CensusPlus_PerCharInfo["Verbose"] ~= true and 
 						not g_CensusPlusPaused and 
@@ -387,7 +389,7 @@ local function GetRaceClasses(race)
 	elseif (race == CENSUSPlus_TAUREN) then
 		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_HUNTER, CENSUSPlus_SHAMAN, CENSUSPlus_DRUID};
 	elseif (race == CENSUSPlus_TROLL) then
-		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_HUNTER, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_SHAMAN, CENSUSPlus_MAGE};
+		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_HUNTER, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_SHAMAN, CENSUSPlus_WARLOCK, CENSUSPlus_MAGE};
 	elseif (race == CENSUSPlus_UNDEAD) then
 		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_MAGE, CENSUSPlus_WARLOCK, CENSUSPlus_HUNTER};
 	elseif (race == CENSUSPlus_DWARF) then
@@ -395,7 +397,7 @@ local function GetRaceClasses(race)
 	elseif (race == CENSUSPlus_GNOME) then
 		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_ROGUE, CENSUSPlus_MAGE, CENSUSPlus_WARLOCK, CENSUSPlus_HUNTER};
 	elseif (race == CENSUSPlus_HUMAN) then
-		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_PALADIN, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_MAGE, CENSUSPlus_WARLOCK};
+		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_HUNTER, CENSUSPlus_PALADIN, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_MAGE, CENSUSPlus_WARLOCK};
 	elseif (race == CENSUSPlus_NIGHTELF) then
 		ret = {CENSUSPlus_WARRIOR, CENSUSPlus_HUNTER, CENSUSPlus_ROGUE, CENSUSPlus_PRIEST, CENSUSPlus_DRUID};
 	elseif (race == CENSUSPlus_HIGHELF) then
@@ -742,6 +744,7 @@ function CensusPlus_WhoHandler( msg )
 		--
 		g_CensusWhoOverrideMsg = msg;
 		CensusPlus_Msg( CENSUSPlus_OVERRIDE );
+		CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Paused")
 --		SendWho(msg);
 	else
 		g_Pre_WhoHandler(msg);
@@ -961,15 +964,18 @@ function CensusPlus_Take_OnEnter()
 			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
 			GameTooltip:SetText(CENSUSPlus_UNPAUSECENSUS, 1.0, 1.0, 1.0);
 			GameTooltip:Show();
+			CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Paused")
 		else
 			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
 			GameTooltip:SetText(CENSUSPlus_PAUSECENSUS, 1.0, 1.0, 1.0);
 			GameTooltip:Show();
+			CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Running")
 		end
 	else
 		GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
 		GameTooltip:SetText(CENSUSPlus_TAKECENSUS, 1.0, 1.0, 1.0);
 		GameTooltip:Show();
+		CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Up")
 	end
 end
 
@@ -983,9 +989,11 @@ function CensusPlus_TogglePause()
 	    if( g_CensusPlusManuallyPaused == true ) then
 	        CensusPlusTakeButton:SetText( CENSUSPlus_PAUSE );
             g_CensusPlusManuallyPaused = false;
+			CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Running")
 	    else
 	        CensusPlusTakeButton:SetText( CENSUSPlus_UNPAUSE );
             g_CensusPlusManuallyPaused = true;
+			CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Paused")
         end
     end
 end
@@ -1050,6 +1058,7 @@ function CensusPlus_StartCensus()
 	    if( g_CensusPlusManuallyPaused == true ) then
 	        g_CensusPlusManuallyPaused = false;
 	        CensusPlusPauseButton:SetText( CENSUSPlus_PAUSE );
+			CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Running")
 	    else
 		    -- Do not initiate a new CensusPlus while one is in progress
 		    CensusPlus_Msg(CENSUSPlus_ISINPROGRESS);
@@ -1066,6 +1075,7 @@ function CensusPlus_StartCensus()
 		--
 		-- Initialize the job queue and counters
 		--
+		CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Running");
 		CensusPlus_Msg(CENSUSPlus_TAKINGONLINE);
 		g_NumNewCharacters = 0;
 		g_NumUpdatedCharacters = 0;
@@ -1118,6 +1128,7 @@ function CensusPlus_StopCensus(  )
 	if (g_IsCensusPlusInProgress) then
         CensusPlusTakeButton:SetText( CENSUSPlus_TAKE );
         g_CensusPlusManuallyPaused = false;
+		CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Up")
 
 		g_JobQueue = {};
 		g_JobQueue = nil;
@@ -1237,11 +1248,13 @@ function CensusPlus_OnEvent(event,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9)
 	            or event == "AUCTION_HOUSE_SHOW" or event == "BANKFRAME_OPENED" or event == "QUEST_DETAIL" ) then
 	    if( g_IsCensusPlusInProgress ) then
 	        g_CensusPlusPaused = true;
+			CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Paused")
 	    end
 	elseif( event == "TRAINER_CLOSED" or event == "MERCHANT_CLOSED" or event == "TRADE_CLOSED" or event == "GUILD_REGISTRAR_CLOSED"
 	            or event == "AUCTION_HOUSE_CLOSED" or event == "BANKFRAME_CLOSED" or event == "QUEST_FINISHED" ) then
 	    if( g_IsCensusPlusInProgress ) then
 	        g_CensusPlusPaused = false;
+			CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Running")
 	    end
 	elseif(event == "WHO_LIST_UPDATE") then
 		--
@@ -1254,12 +1267,14 @@ function CensusPlus_OnEvent(event,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9)
 			g_CensusWhoOverrideMsg = nil;
 			g_WaitingForOverrideUpdate = false;
 			CensusPlus_Msg( CENSUSPlus_OVERRIDE_COMPLETE_BUT_PAUSED );
+			CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Paused")
 			g_Pre_WhoList_UpdateOverride();
 			
 			--
 			--  If we opened the who window, do a manual pause and open a dialog
 			--
 			g_CensusPlusManuallyPaused = true;
+			CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Paused")
 	        CensusPlusTakeButton:SetText( CENSUSPlus_UNPAUSE );	
 	        
 			StaticPopup_Show ("CP_CONTINUE_CENSUS");
@@ -1789,6 +1804,7 @@ function CensusPlus_OnUpdate()
 						if( CensusPlus_PerCharInfo["PlayFinishSound"] ) then
 							PlaySoundFile("Interface\\AddOns\\CensusPlus\\Sounds\\CensusComplete.ogg")
 						end
+						CensusButton:SetNormalTexture("Interface\\AddOns\\CensusPlus\\Skin\\CensusButton-Up")
 						
 						CensusPlus_DoTimeCounts();
 						CensusPlus_DisplayResults();
