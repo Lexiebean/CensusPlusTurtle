@@ -53,7 +53,7 @@ local CensusPlus_NUMGUILDBUTTONS = 19;			-- How many guild buttons are on the UI
 local MAX_CHARACTER_LEVEL = 60;					-- Maximum level a PC can attain
 local MAX_WHO_RESULTS = 49;						-- Maximum number of who results the server will return
 CensusPlus_GUILDBUTTONSIZEY = 16;
-local CensusPlus_UPDATEDELAY = 5;				-- Delay time between /who messages
+local CensusPlus_UPDATEDELAY = 30;				-- Delay time between /who messages
 local CP_MAX_TIMES = 50;
 
 local g_ServerPrefix = "";						--  US VERSION!!
